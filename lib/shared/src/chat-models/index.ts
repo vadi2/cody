@@ -45,6 +45,41 @@ const defaultDotComChatModels: ChatModelProvider[] = [
         default: false,
         codyProOnly: true,
     },
+    {
+        title: 'Mixtral 8x7B (Ollama)',
+        model: 'ollama/mixtral',
+        provider: 'Mistral',
+        default: false,
+        codyProOnly: false,
+    },
+    {
+        title: 'Mistral 7B (Ollama)',
+        model: 'ollama/mistral',
+        provider: 'Mistral',
+        default: false,
+        codyProOnly: false,
+    },
+    {
+        title: 'Phi 2.7B (Ollama)',
+        model: 'ollama/phi',
+        provider: 'Microsoft Research',
+        default: false,
+        codyProOnly: false,
+    },
+    {
+        title: 'Code Llama 13B (Ollama)',
+        model: 'ollama/codellama-13b',
+        provider: 'Meta',
+        default: false,
+        codyProOnly: false,
+    },
+    {
+        title: 'TinyDolphin 1.1B (Ollama)',
+        model: 'ollama/tinydolphin',
+        provider: 'Eric Hartford',
+        default: false,
+        codyProOnly: false,
+    },
 ]
 
 /**
@@ -119,6 +154,8 @@ function getProviderName(name: string): string {
             return 'Anthropic'
         case 'openai':
             return 'OpenAI'
+        case 'mistral':
+            return 'Mistral'
         default:
             return providerName
     }
