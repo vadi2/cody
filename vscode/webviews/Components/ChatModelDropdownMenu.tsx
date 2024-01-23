@@ -9,6 +9,7 @@ import {
     AnthropicLogo,
     MetaLogo,
     MistralLogo,
+    OllamaLogo,
     OpenAILogo,
     UnrecognizedLogo,
 } from '@sourcegraph/cody-ui/src/icons/LLMProviderIcons'
@@ -161,6 +162,9 @@ const ModelIcon = ({
     if (provider === 'Meta' || model.includes('codellama')) {
         return <MetaLogo className={className} />
     }
+    if (model.startsWith('ollama/')) {
+        return <OllamaLogo className={className} />
+    }
     return (
         <UnrecognizedLogo
             name={model}
@@ -172,7 +176,6 @@ const ModelIcon = ({
 
 function abbreviationForModel({
     title,
-    provider,
     model,
 }: Pick<ChatModelProvider, 'title' | 'model' | 'provider'>): string {
     if (model.match(/\bphi\b/)) {
