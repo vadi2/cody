@@ -60,6 +60,13 @@ const defaultDotComChatModels: ChatModelProvider[] = [
         codyProOnly: false,
     },
     {
+        title: 'StarChat beta 15.5B (Ollama)',
+        model: 'ollama/sqs/starchat:beta-q5_K_M',
+        provider: 'BigCode Project',
+        default: false,
+        codyProOnly: false,
+    },
+    {
         title: 'Phi 2.7B (Ollama)',
         model: 'ollama/phi',
         provider: 'Microsoft Research',
@@ -68,7 +75,7 @@ const defaultDotComChatModels: ChatModelProvider[] = [
     },
     {
         title: 'Code Llama 13B (Ollama)',
-        model: 'ollama/codellama-13b',
+        model: 'ollama/codellama:13b',
         provider: 'Meta',
         default: false,
         codyProOnly: false,

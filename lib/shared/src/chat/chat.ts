@@ -25,7 +25,11 @@ export class ChatClient {
         abortSignal?: AbortSignal
     ): AsyncGenerator<CompletionGeneratorValue> {
         if (params?.model?.startsWith('ollama/')) {
-            return ollamaChat(messages, params, abortSignal)
+            return ollamaChat(
+                messages,
+                { ...DEFAULT_CHAT_COMPLETION_PARAMETERS, ...params },
+                abortSignal
+            )
         }
 
         const isLastMessageFromHuman = messages.length > 0 && messages.at(-1)!.speaker === 'human'

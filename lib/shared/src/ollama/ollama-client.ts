@@ -57,6 +57,7 @@ export function createOllamaClient(
         params: OllamaGenerateParams,
         abortController: AbortController
     ): CompletionResponseGenerator {
+        console.log('PARAMS', params)
         const url = new URL('/api/generate', ollamaOptions.url).href
         const log = logger?.startCompletion(params, url)
 
