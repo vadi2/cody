@@ -259,17 +259,17 @@ export class Agent extends MessageHandler {
             this.workspace.workspaceRootUri = clientInfo.workspaceRootUri
                 ? vscode.Uri.parse(clientInfo.workspaceRootUri)
                 : vscode.Uri.from({
-                      scheme: 'file',
-                      path: clientInfo.workspaceRootPath,
-                  })
+                    scheme: 'file',
+                    path: clientInfo.workspaceRootPath,
+                })
             try {
                 await initializeVscodeExtension(this.workspace.workspaceRootUri)
                 this.registerWebviewHandlers()
 
                 this.authenticationPromise = clientInfo.extensionConfiguration
                     ? this.handleConfigChanges(clientInfo.extensionConfiguration, {
-                          forceAuthentication: true,
-                      })
+                        forceAuthentication: true,
+                    })
                     : this.authStatus()
                 const authStatus = await this.authenticationPromise
 
@@ -288,7 +288,7 @@ export class Agent extends MessageHandler {
             }
         })
 
-        this.registerNotification('initialized', () => {})
+        this.registerNotification('initialized', () => { })
 
         this.registerRequest('shutdown', async () => {
             if (this?.params?.polly) {
@@ -424,8 +424,8 @@ export class Agent extends MessageHandler {
                                 reject(
                                     new Error(
                                         'testing/progressCancelation did not resolve within 5 seconds. ' +
-                                            'To fix this problem, send a progress/cancel notification with the same ID ' +
-                                            'as the progress/start notification with title "testing/progressCancelation"'
+                                        'To fix this problem, send a progress/cancel notification with the same ID ' +
+                                        'as the progress/start notification with title "testing/progressCancelation"'
                                     )
                                 ),
                             5_000
@@ -456,8 +456,8 @@ export class Agent extends MessageHandler {
                 typeof params.uri === 'string'
                     ? vscode.Uri.parse(params.uri)
                     : params?.filePath
-                      ? vscode.Uri.file(params.filePath)
-                      : undefined
+                        ? vscode.Uri.file(params.filePath)
+                        : undefined
             if (!uri) {
                 logError(
                     'Agent',
@@ -493,17 +493,17 @@ export class Agent extends MessageHandler {
                             vscode.InlineCompletionTriggerKind[params.triggerKind || 'Automatic'],
                         selectedCompletionInfo:
                             params.selectedCompletionInfo?.text === undefined ||
-                            params.selectedCompletionInfo?.text === null
+                                params.selectedCompletionInfo?.text === null
                                 ? undefined
                                 : {
-                                      text: params.selectedCompletionInfo.text,
-                                      range: new vscode.Range(
-                                          params.selectedCompletionInfo.range.start.line,
-                                          params.selectedCompletionInfo.range.start.character,
-                                          params.selectedCompletionInfo.range.end.line,
-                                          params.selectedCompletionInfo.range.end.character
-                                      ),
-                                  },
+                                    text: params.selectedCompletionInfo.text,
+                                    range: new vscode.Range(
+                                        params.selectedCompletionInfo.range.start.line,
+                                        params.selectedCompletionInfo.range.start.character,
+                                        params.selectedCompletionInfo.range.end.line,
+                                        params.selectedCompletionInfo.range.end.character
+                                    ),
+                                },
                     },
                     token
                 )
@@ -759,7 +759,7 @@ export class Agent extends MessageHandler {
                     })
                 )
                 this.receiveWebviewMessage(id, message).then(
-                    () => {},
+                    () => { },
                     error => reject(error)
                 )
                 disposables.push(
@@ -767,7 +767,7 @@ export class Agent extends MessageHandler {
                         this.receiveWebviewMessage(id, {
                             command: 'abort',
                         }).then(
-                            () => {},
+                            () => { },
                             error => reject(error)
                         )
                     })
@@ -783,9 +783,8 @@ export class Agent extends MessageHandler {
         this.registerAuthenticatedRequest('chat/submitMessage', submitOrEditHandler)
         this.registerAuthenticatedRequest('chat/editMessage', submitOrEditHandler)
 
-        this.registerAuthenticatedRequest('webview/receiveMessage', async ({ id, message }) => {
+        this.registerNotification('webview/receiveMessage', async ({ id, message }) => {
             await this.receiveWebviewMessage(id, message)
-            return null
         })
 
         this.registerAuthenticatedRequest('featureFlags/getFeatureFlag', async ({ flagName }) => {

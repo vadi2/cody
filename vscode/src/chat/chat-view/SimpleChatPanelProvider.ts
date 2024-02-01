@@ -411,18 +411,18 @@ export class SimpleChatPanelProvider implements vscode.Disposable, ChatSession {
             userContextItems,
             addEnhancedContext
                 ? (text, maxChars) =>
-                      getEnhancedContext({
-                          strategy: this.config.useContext,
-                          editor: this.editor,
-                          text,
-                          providers: {
-                              localEmbeddings: this.localEmbeddings,
-                              symf: this.config.experimentalSymfContext ? this.symf : null,
-                              remoteSearch: this.remoteSearch,
-                          },
-                          featureFlags: this.config,
-                          hints: { maxChars },
-                      })
+                    getEnhancedContext({
+                        strategy: this.config.useContext,
+                        editor: this.editor,
+                        text,
+                        providers: {
+                            localEmbeddings: this.localEmbeddings,
+                            symf: this.config.experimentalSymfContext ? this.symf : null,
+                            remoteSearch: this.remoteSearch,
+                        },
+                        featureFlags: this.config,
+                        hints: { maxChars },
+                    })
                 : undefined
         )
         const sendTelemetry = (contextSummary: any): void => {

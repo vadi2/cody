@@ -239,6 +239,8 @@ export type Notifications = {
     'progress/report': [ProgressReportParams]
 
     'progress/end': [{ id: string }]
+
+    'webview/receiveMessage': [{ id: string; message: WebviewMessage }, null]
 }
 
 interface CancelParams {

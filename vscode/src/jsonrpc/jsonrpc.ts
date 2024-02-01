@@ -345,8 +345,8 @@ export class MessageHandler {
                                 const code = cancelToken.token.isCancellationRequested
                                     ? ErrorCode.RequestCanceled
                                     : isRateLimitError(error)
-                                      ? ErrorCode.RateLimitError
-                                      : ErrorCode.InternalError
+                                        ? ErrorCode.RateLimitError
+                                        : ErrorCode.InternalError
                                 const data: ResponseMessage<any> = {
                                     jsonrpc: '2.0',
                                     id: msg.id,
@@ -477,7 +477,7 @@ class InProcessClient {
     constructor(
         private readonly requestHandlers: Map<RequestMethodName, RequestCallback<any>>,
         private readonly notificationHandlers: Map<NotificationMethodName, NotificationCallback<any>>
-    ) {}
+    ) { }
 
     public request<M extends RequestMethodName>(
         method: M,
