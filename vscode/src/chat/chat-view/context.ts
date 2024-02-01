@@ -99,6 +99,14 @@ export async function getEnhancedContext({
     featureFlags,
     hints,
 }: GetEnhancedContextOptions): Promise<ContextItem[]> {
+    await logAllEnhancedContextItems({
+        strategy,
+        editor,
+        text,
+        providers,
+        featureFlags,
+        hints
+    })
     if (featureFlags.internalUnstable) {
         return getEnhancedContextFused({
             strategy,
