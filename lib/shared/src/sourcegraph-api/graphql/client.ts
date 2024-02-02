@@ -297,6 +297,9 @@ export class SourcegraphGraphQLAPIClient {
     }
 
     public onConfigurationChange(newConfig: GraphQLAPIClientConfig): void {
+        console.log(
+            `Api Client config updated ${newConfig.accessToken ? 'with token' : 'with no token'}`
+        )
         this._config = newConfig
     }
 
@@ -729,6 +732,9 @@ export class SourcegraphGraphQLAPIClient {
     }
 
     public async getEvaluatedFeatureFlags(): Promise<Record<string, boolean> | Error> {
+        console.log(
+            `Evaluating feature flags ${this._config?.accessToken ? 'with token' : 'with no token'}`
+        )
         return this.fetchSourcegraphAPI<APIResponse<EvaluatedFeatureFlagsResponse>>(
             GET_FEATURE_FLAGS_QUERY,
             {}
@@ -743,6 +749,11 @@ export class SourcegraphGraphQLAPIClient {
     }
 
     public async evaluateFeatureFlag(flagName: string): Promise<boolean | null | Error> {
+        console.log(
+            `Evaluating feature flag ${flagName} ${
+                this._config?.accessToken ? 'with token' : 'with no token'
+            }`
+        )
         return this.fetchSourcegraphAPI<APIResponse<EvaluateFeatureFlagResponse>>(
             EVALUATE_FEATURE_FLAG_QUERY,
             {

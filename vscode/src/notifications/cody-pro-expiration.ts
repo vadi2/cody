@@ -74,14 +74,24 @@ export class CodyProExpirationNotifications implements vscode.Disposable {
 
         // Set up check for each time auth changes...
         if (!this.authProviderSubscription) {
-            this.authProviderSubscription = this.authProvider.addChangeListener(() =>
+            this.authProviderSubscription = this.authProvider.addChangeListener(() => {
+                console.log('Authentication change was triggered... Checking Cody Pro expiration...')
                 this.triggerExpirationCheck()
-            )
+            })
         }
 
         // Not logged in or not DotCom, don't show.
         const authStatus = this.authProvider.getAuthStatus()
         if (!authStatus.isLoggedIn || !authStatus.isDotCom) return
+
+        console.log('Asking for UseSscForCodySubscription feature flag')
+        console.log(
+            `    ${
+                (this.featureFlagProvider as any).apiClient.accessToken
+                    ? '(apiClient has token)'
+                    : '(no access token on apiClient!)'
+            }`
+        )
 
         const useSscForCodySubscription = await this.featureFlagProvider.evaluateFeatureFlag(
             FeatureFlag.UseSscForCodySubscription
